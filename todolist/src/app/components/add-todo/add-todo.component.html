@@ -1,0 +1,5 @@
+<div class="todolist__todo-component_add-todo">
+        <input class="todolist__add-todo_name-input" type="text" placeholder="Enter tutorial name" #name>
+        <input class="todolist__add-todo_description-input" type="text" placeholder="Enter tutorial url" #description>
+        <button class="todolist__add-todo_submit-button" (click)="addTodo(name.value,description.value)">Add TODO</button>
+</div>

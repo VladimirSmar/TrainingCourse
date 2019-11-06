@@ -1,0 +1,47 @@
+.todo__list-items-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin-bottom: 15px;
+}
+
+.todo__list-items_checkbox-container {
+    width: 15%;
+}
+
+.todo__list-items_info-container {
+    width: 70%;
+    word-wrap: break-word;
+}
+
+.todo__list-items_delete-button-container {
+    width: 15%;
+}
+
+.todo__list-items_checkbox {
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+}
+
+.todo__list_delete-button {
+    margin-left: 10px;
+    width: 25px;
+    height: 25px;
+}
+
+.todo__list-items_name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.completedTodo {
+    text-decoration: line-through;
+}
+
+.todo__list_title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}

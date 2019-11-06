@@ -1,0 +1,16 @@
+<div class="todo__list" *ngIf="todosObservable">
+
+    <div class="todo__list_title">TODOS</div>
+    <div class="todo__list-items-container" *ngFor="let todo of todosObservable | async; let i = index">
+        <div class="todo__list-items_checkbox-container">
+            <input class="todo__list-items_checkbox" id='todoCheck' type="checkbox" (click)="completeTodo(i)">
+        </div>
+        <div class="todo__list-items_info-container">
+            <div class="todo__list-items_name">{{todo.name}}</div>
+            <div class="todo__list-items_description">{{todo.description}}</div>
+        </div>
+        <div class="todo__list-items_delete-button-container">
+            <button class="todo__list_delete-button" (click)="deleteTodo(i)">X</button>
+        </div>
+    </div>
+</div>
