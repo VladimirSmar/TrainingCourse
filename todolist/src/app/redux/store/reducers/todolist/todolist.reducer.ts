@@ -6,7 +6,7 @@ const initialState = {
     id: 1,
     name: 'Initial Todo',
     description: 'Somthing about this todo, dont really know what to put here',
-    completed: false
+    isCompleted: true
 };
 
 export function todoReducer(state: ITodo[] = [initialState], action: TodoActions.Actions) {
@@ -21,7 +21,22 @@ export function todoReducer(state: ITodo[] = [initialState], action: TodoActions
         }
 
         case (TodoActions.UPDATE_TODO): {
-            return [...state, action.payload];
+            state[action.payload.id].name = action.payload.name;
+            state[action.payload.id].description = action.payload.description;
+            state[action.payload.id].isCompleted = action.payload.isCompleted;
+            state[action.payload.id].isEdited = undefined;
+            state[action.payload.id].id = undefined;
+            return state;
+        }
+
+        case (TodoActions.COMPLETE_TODO) : {
+            state[action.payload].isCompleted = !state[action.payload].isCompleted;
+            return state;
+        }
+
+        case (TodoActions.EDIT_TODO) : {
+            state[action.payload].isEdited = true;
+            return state;
         }
 
         default:

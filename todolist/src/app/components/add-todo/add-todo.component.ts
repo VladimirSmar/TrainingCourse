@@ -16,7 +16,18 @@ export class AddTodoComponent implements OnInit {
   ) { }
 
   addTodo(name: string, description: string) {
-    this._loggingService.addTodo(name, description);
+    let todoNameContainer: HTMLInputElement = <HTMLInputElement>document.getElementById("todolist__add-todo_name-input");
+    let todoDescriptionContainer: HTMLInputElement = <HTMLInputElement>document.getElementById("todolist__add-todo_description-input");
+
+    if(!this.isEmptyOrSpaces(name) && !this.isEmptyOrSpaces(description)) {
+      this._loggingService.addTodo(name, description);
+      todoNameContainer.value = '';
+      todoDescriptionContainer.value = '';
+    }
+  }
+
+  isEmptyOrSpaces(str: string){
+    return str === null || str.match(/^ *$/) !== null;
   }
 
   ngOnInit() {

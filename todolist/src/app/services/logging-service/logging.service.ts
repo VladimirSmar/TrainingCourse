@@ -14,22 +14,22 @@ export class LoggingService {
   ) { }
 
   public addTodo(name: string, description: string): void {
-    this._store.dispatch(new TodoActions.AddTodo({name, description, completed: false}));
+    this._store.dispatch(new TodoActions.AddTodo({name, description, isCompleted: false}));
   }
 
   public removeTodo(index: number): void {
     this._store.dispatch(new TodoActions.RemoveTodo(index));
   }
 
-  public updateTodo(name: string, description: string, completed: boolean): void {
-    this._store.dispatch(new TodoActions.UpdateTodo({name, description, completed}));
+  public updateTodo(name: string, description: string, isCompleted: boolean, id: number): void {
+    this._store.dispatch(new TodoActions.UpdateTodo({name, description, isCompleted, id}));
   }
 
- /*  public completeTodo(index: number): void {
-    let todoCheckbox = document.getElementById('todoCheck');
+  public completeTodo(index: number): void {
+    this._store.dispatch(new TodoActions.CompleteTodo(index));
+  }
 
-    if(todoCheckbox.checked == true) {
-      
-    } 
-  }*/
+  public editTodo(index: number): void {
+    this._store.dispatch(new TodoActions.EditTodo(index));
+  }
 }

@@ -1,16 +1,36 @@
-<div class="todo__list" *ngIf="todosObservable">
+<div class="todolist__list" *ngIf="todosObservable">
 
-    <div class="todo__list_title">TODOS</div>
-    <div class="todo__list-items-container" *ngFor="let todo of todosObservable | async; let i = index">
-        <div class="todo__list-items_checkbox-container">
-            <input class="todo__list-items_checkbox" id='todoCheck' type="checkbox" (click)="completeTodo(i)">
+    <div class="todolist__list-title">TODOS</div>
+    <div class="todolist__list-items-container" *ngFor="let todo of todosObservable | async; let i = index">
+        <div class="todolist__list-items_checkbox-container">
+            <input class="todolist__list-items_checkbox" type="checkbox" [checked]='todo.isCompleted'
+                (click)="completeTodo(i)" #todoIsCompleted>
         </div>
-        <div class="todo__list-items_info-container">
-            <div class="todo__list-items_name">{{todo.name}}</div>
-            <div class="todo__list-items_description">{{todo.description}}</div>
+        <div class="todolist__list-items_info-container" (dblclick)="editTodo(i)">
+            <div class="todolist__list-items_info" *ngIf="!todo.isEdited; else editedTodo">
+                <div class="todolist__list-items_text-container" *ngIf="!todo.isCompleted; else completedTodo">
+                    <div class="todolist__list-items_name">{{todo.name}}</div>
+                    <div class="todolist__list-items_description">{{todo.description}}</div>
+                </div>
+            </div>
         </div>
-        <div class="todo__list-items_delete-button-container">
-            <button class="todo__list_delete-button" (click)="deleteTodo(i)">X</button>
+        <ng-template #completedTodo>
+            <div class="todolist__list-items_info">
+                <div class="todolist__list-items_name todolist__list-items_completed-todo">{{todo.name}}</div>
+                <div class="todolist__list-items_description todolist__list-items_completed-todo">{{todo.description}}</div>
+            </div>
+        </ng-template>
+        <ng-template #editedTodo>
+            <div class="todolist__list-items_info">
+                <input class="todolist__add-todo_name-input" type="text" [(value)]="todo.name"  placeholder="Enter TODO name" #todoNameEdit>
+                <textarea class="todolist__add-todo_description-input" type="text" rows="5" [(value)]="todo.description" 
+                    placeholder="Enter TODO description" #todoDescriptionEdit></textarea>
+                <button class="todolist__add-todo_submit-button"
+                    (click)="updateTodo(i, todoNameEdit.value, todoDescriptionEdit.value, todoIsCompleted.checked)">Update TODO</button>
+            </div>
+        </ng-template>
+        <div class="todolist__list-items_delete-button-container">
+            <button class="todolist__list-button" (click)="deleteTodo(i)">X</button>
         </div>
     </div>
 </div>

@@ -7,14 +7,12 @@ import { todoReducer } from './redux/store/reducers/todolist/todolist.reducer';
 import { AppComponent } from './app.component';
 import { AddTodoComponent } from './components/add-todo/add-todo.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { UpdateTodoComponent } from './components/update-todo/update-todo.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddTodoComponent,
     TodoListComponent,
-    UpdateTodoComponent
   ],
   imports: [
     BrowserModule,

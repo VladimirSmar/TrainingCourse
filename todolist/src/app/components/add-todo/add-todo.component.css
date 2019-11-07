@@ -2,3 +2,8 @@
     padding: 20px;
     margin-right: 5px;
 }
+
+.todolist__add-todo_description-input {
+    resize: none;
+    width: 100%;
+}
