@@ -8,26 +8,22 @@ import { LoggingService } from '../../services/logging-service/logging.service';
   templateUrl: './add-todo.component.html',
   styleUrls: ['./add-todo.component.css']
 })
-export class AddTodoComponent implements OnInit {
-
+export class AddTodoComponent implements OnInit 
+{
   constructor(
     private _store: Store<AppState>,
     private _loggingService: LoggingService
-  ) { }
+  ) {}
 
   addTodo(name: string, description: string) {
     let todoNameContainer: HTMLInputElement = <HTMLInputElement>document.getElementById("todolist__add-todo_name-input");
     let todoDescriptionContainer: HTMLInputElement = <HTMLInputElement>document.getElementById("todolist__add-todo_description-input");
 
-    if(!this.isEmptyOrSpaces(name) && !this.isEmptyOrSpaces(description)) {
+    if(!this._loggingService.isEmptyOrSpaces(name) && !this._loggingService.isEmptyOrSpaces(description)) {
       this._loggingService.addTodo(name, description);
       todoNameContainer.value = '';
       todoDescriptionContainer.value = '';
     }
-  }
-
-  isEmptyOrSpaces(str: string){
-    return str === null || str.match(/^ *$/) !== null;
   }
 
   ngOnInit() {

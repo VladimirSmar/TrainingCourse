@@ -3,10 +3,11 @@ import { ITodo } from '../../models/todolist/todolist.model';
 import * as TodoActions from '../../actions/todolist/todolist.actions';
 
 const initialState = {
-    id: 1,
     name: 'Initial Todo',
-    description: 'Somthing about this todo, dont really know what to put here',
-    isCompleted: true
+    description: 'Something about this todo, dont really know what to put here',
+    isCompleted: true,
+    isEdited: false,
+    id: 1
 };
 
 export function todoReducer(state: ITodo[] = [initialState], action: TodoActions.Actions) {
@@ -16,27 +17,52 @@ export function todoReducer(state: ITodo[] = [initialState], action: TodoActions
         }
 
         case (TodoActions.REMOVE_TODO): {
-            state.splice(action.payload, 1);
-            return state;
+            return state.filter((item, index) => index !== action.payload)
         }
 
         case (TodoActions.UPDATE_TODO): {
-            state[action.payload.id].name = action.payload.name;
-            state[action.payload.id].description = action.payload.description;
-            state[action.payload.id].isCompleted = action.payload.isCompleted;
-            state[action.payload.id].isEdited = undefined;
-            state[action.payload.id].id = undefined;
-            return state;
+            let updatedTodo = {
+                name: action.payload.name,
+                description: action.payload.description,
+                isCompleted: action.payload.isCompleted,
+                isEdited: action.payload.isEdited
+            }
+
+            return state.map((item, index) => {
+                if (index !== action.payload.id) {
+                    return item
+                }
+
+                return {
+                    ...updatedTodo
+                }
+            })
         }
 
-        case (TodoActions.COMPLETE_TODO) : {
-            state[action.payload].isCompleted = !state[action.payload].isCompleted;
-            return state;
+        case (TodoActions.COMPLETE_TODO): {
+            return state.map((item, index) => {
+                if (index !== action.payload) {
+                    return item
+                }
+
+                return {
+                    ...item,
+                    isCompleted: !item.isCompleted
+                }
+            })
         }
 
-        case (TodoActions.EDIT_TODO) : {
-            state[action.payload].isEdited = true;
-            return state;
+        case (TodoActions.EDIT_TODO): {
+            return state.map((item, index) => {
+                if (index !== action.payload) {
+                    return item
+                }
+
+                return {
+                    ...item,
+                    isEdited: true
+                }
+            })
         }
 
         default:

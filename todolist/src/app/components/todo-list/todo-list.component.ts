@@ -18,7 +18,7 @@ export class TodoListComponent implements OnInit {
     private _store: Store<AppState>,
     private _loggingService: LoggingService
   ) {
-    this.todosObservable = _store.select('todo');
+    this.todosObservable = this._store.select('todo');
   }
 
   deleteTodo(index: number) {
@@ -34,7 +34,9 @@ export class TodoListComponent implements OnInit {
   }
 
   updateTodo(index: number, name: string, description: string, isCompleted: boolean) {
-    this._loggingService.updateTodo(name, description, isCompleted, index);
+    if(!this._loggingService.isEmptyOrSpaces(name) && !this._loggingService.isEmptyOrSpaces(description)) {
+      this._loggingService.updateTodo(name, description, isCompleted, index);    
+    }
   }
 
   ngOnInit() {
