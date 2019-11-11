@@ -17,52 +17,50 @@ export function todoReducer(state: ITodo[] = [initialState], action: TodoActions
         }
 
         case (TodoActions.REMOVE_TODO): {
-            return state.filter((item, index) => index !== action.payload)
+            return state.filter((item, index) => index !== action.payload);
         }
 
         case (TodoActions.UPDATE_TODO): {
-            let updatedTodo = {
+            const updatedTodo = {
                 name: action.payload.name,
                 description: action.payload.description,
                 isCompleted: action.payload.isCompleted,
                 isEdited: action.payload.isEdited
-            }
+            };
 
             return state.map((item, index) => {
                 if (index !== action.payload.id) {
-                    return item
+                    return item;
                 }
 
-                return {
-                    ...updatedTodo
-                }
-            })
+                return updatedTodo;
+            });
         }
 
         case (TodoActions.COMPLETE_TODO): {
             return state.map((item, index) => {
                 if (index !== action.payload) {
-                    return item
+                    return item;
                 }
 
                 return {
                     ...item,
                     isCompleted: !item.isCompleted
-                }
-            })
+                };
+            });
         }
 
         case (TodoActions.EDIT_TODO): {
             return state.map((item, index) => {
                 if (index !== action.payload) {
-                    return item
+                    return item;
                 }
 
                 return {
                     ...item,
                     isEdited: true
-                }
-            })
+                };
+            });
         }
 
         default:

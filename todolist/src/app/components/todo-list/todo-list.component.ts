@@ -34,8 +34,8 @@ export class TodoListComponent implements OnInit {
   }
 
   updateTodo(index: number, name: string, description: string, isCompleted: boolean) {
-    if(!this._loggingService.isEmptyOrSpaces(name) && !this._loggingService.isEmptyOrSpaces(description)) {
-      this._loggingService.updateTodo(name, description, isCompleted, index);    
+    if (!this._loggingService.isEmptyOrSpaces(name) && !this._loggingService.isEmptyOrSpaces(description)) {
+      this._loggingService.updateTodo(name, description, isCompleted, index);
     }
   }
 
