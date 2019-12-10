@@ -1,0 +1,187 @@
+import { Injectable, OnDestroy } from '@angular/core';
+import { Player } from 'app/player';
+import { Monster } from 'app/monster';
+import { Upgrade } from 'app/upgrade';
+import { Stages } from 'app/stages';
+import { Http } from '@angular/http';
+import { Store } from '@ngrx/store';
+
+import * as PlayerActions from '../store/actions/playerActions';
+import * as upgradeActions from '../store/actions/upgradeActions';
+import * as monsterActions from '../store/actions/monsterActions';
+
+@Injectable()
+export class MainServiceService implements OnDestroy {
+
+  private _currentMonsterAnimation = {
+    monster1: 1,
+    monster2: 0,
+    monster3: 0
+  };
+  private _standartMonsterStatistic = {
+    money: 10,
+    health: 10
+  };
+
+  private _player = null;
+
+  private _monster = null;
+  private _upgrades = null;
+  private _leftStyle = null;
+  private _stages: Stages[] = [];
+  private _platformIndexes = null;
+
+  private _playerSubscribe = null;
+  private _upgradesSubscribe = null;
+  private _monsterSubscribe = null;
+  setInfo() {
+
+    if (localStorage['mainInfo']) {
+      const currentInfoObject = JSON.parse(localStorage.getItem('mainInfo'));
+
+      this.store.dispatch(new PlayerActions.updatePlayer(currentInfoObject.player));
+      this._playerSubscribe = this.store.select('player').subscribe(info => this._player = info);
+
+      this.store.dispatch(new monsterActions.updateMonster(currentInfoObject.monster));
+      this._monsterSubscribe = this.store.select('monster').subscribe(info => this._monster = info);
+
+      this.store.dispatch(new upgradeActions.updateUpgrades(currentInfoObject.upgrades));
+      this._upgradesSubscribe = this.store.select('upgrade').subscribe(info => this._upgrades = Object.keys(info).map(key => info[key]));
+
+      this._stages = currentInfoObject.stages;
+      this._leftStyle = currentInfoObject.leftStyle;
+      this._platformIndexes = currentInfoObject.platformIndexes;
+    } else {
+      this.http.get('http://localhost:4200/assets/jsons/stages.json')
+        .subscribe(data => this._stages = Stages.fromJSON(data));
+      this._leftStyle = { left: 0, state: true };
+      this._platformIndexes = {
+        stageArrayPlatformIndex: 1,
+      };
+
+      this.http.get('http://localhost:4200/assets/jsons/player.json')
+        .subscribe(data => this._player = Player.fromJSON(data));
+
+      this.http.get('http://localhost:4200/assets/jsons/monster.json')
+        .subscribe(data => this._monster = Monster.fromJSON(data));
+
+      this.http.get('http://localhost:4200/assets/jsons/upgrades.json')
+        .subscribe(data => this._upgrades = Upgrade.fromJSON(data));
+
+      this.store.dispatch(new PlayerActions.updatePlayer(this._player));
+      this.store.dispatch(new upgradeActions.updateUpgrades(this._upgrades));
+      this.store.dispatch(new monsterActions.updateMonster(this._monster));
+    }
+    this._leftStyle['state'] = true;
+
+  }
+
+  constructor(private http: Http, private store: Store<Player>) {
+  }
+
+  saveToLocalStorage() {
+    const resultObj = {
+      player: this._player,
+      monster: this._monster,
+      upgrades: this._upgrades,
+      stages: this._stages,
+      leftStyle: this._leftStyle,
+      platformIndexes: this._platformIndexes
+    };
+    localStorage.setItem('mainInfo', JSON.stringify(resultObj));
+  }
+
+  getArrStages() {
+    return this._stages;
+  }
+  getLeftStyle() {
+    return this._leftStyle;
+  }
+  getPlatform() {
+    return this._platformIndexes;
+  }
+
+  playerDamageCalculate() {
+    this._player.damage = this._upgrades[0].damage;
+    this._player.damage *= this._player.clickDamageModidificator;
+    let fullDPS: number = null;
+    this._upgrades.forEach(elem => {
+      fullDPS += elem.damagePerSec;
+    });
+    this._player.damagePerSec = fullDPS;
+    this._player.damagePerSec *= this._player.dpsModificator;
+  };
+
+  upgradeCalculate(index: number) {
+    this._upgrades[index].count++;
+
+    this._upgrades[index].cost = this._upgrades[index].standartCost * Math.pow(1.11, this._upgrades[index].count);
+
+    this._upgrades[index].modificator = Math.floor((this._upgrades[index].count) / 25) * 2;
+    if (this._upgrades[index].modificator === 0) {
+      this._upgrades[index].modificator = 1;
+    }
+
+    if (index === 0) {
+      this._upgrades[index].damage = this._upgrades[index].standartDamage *
+        1.2  this._upgrades[index].count  this._upgrades[index].modificator;
+    } else {
+      this._upgrades[index].damagePerSec = this._upgrades[index].standartDamage *
+        1.2  this._upgrades[index].count  this._upgrades[index].modificator;
+    }
+  }
+
+  monsterCalculate(stage: number) {
+    let miniBossCoef: number = 1;
+    let bossCoef: number = 1;
+    const superBossCoef: number = 1;
+    this._monster.name = 'someName' + stage;
+
+    if (this._player.stage % 100 === 0) {
+      this._monster.modificator += 3;
+    } else if (this._player.stage % 50 === 0) {
+      if (this._monster.modificator !== 1) {
+        this._monster.modificator += 2;
+      } else {
+        this._monster.modificator = 2;
+      }
+    }
+
+    if (stage % 5 === 0 && stage % 10 !== 0 && stage % 50 !== 0) {
+      miniBossCoef = 2;
+      this._monster.name = 'Mini Boss: ' + this._monster.name;
+    } else if (stage % 10 === 0 && stage % 50 !== 0) {
+      bossCoef = 5;
+      this._monster.name = 'Boss: ' + this._monster.name;
+    } else if (stage % 50 === 0) {
+      bossCoef = 15;
+      this._monster.name = 'Super Boss: ' + this._monster.name;
+    }
+
+    this._monster.maxHealth = this._standartMonsterStatistic.health  6 
+      stage  miniBossCoef  bossCoef  superBossCoef  this._monster.modificator;
+
+    this._monster.health = this._monster.maxHealth;
+    this._monster.moneyPerDeath = this._standartMonsterStatistic.health  stage  5 * this._monster.modificator;
+  }
+
+  getData(): Player {
+    return this._player;
+  }
+  getDataMonsters(): Monster {
+    return this._monster;
+  }
+  getDataUpgrades(): Upgrade[] {
+    return this._upgrades;
+  }
+  getDataAnimation() {
+    return this._currentMonsterAnimation;
+  }
+
+  ngOnDestroy(): void {
+    this._playerSubscribe.unsubscribe();
+    this._upgradesSubscribe.unsubscribe();
+    this._monsterSubscribe.unsubscribe();
+  }
+
+}

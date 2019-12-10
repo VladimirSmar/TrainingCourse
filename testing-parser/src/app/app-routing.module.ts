@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NewsListComponent } from './components/news-list/news-list.component';
+import { ParseResultComponent } from './components/parse-result/parse-result.component';
 import { NewsItemComponent } from './components/news-item/news-item.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'newsList',
-    pathMatch: 'full'
-  },
-  {
-    path: 'newsList',
-    component: NewsListComponent
-  },
-  {
-    path: 'newsItem',
-    component: NewsItemComponent
-  }
+  { path: '', redirectTo: 'parseResult', pathMatch: 'full' },
+  { path: 'parseResult', component: ParseResultComponent },
+  { path: 'news-item', component: NewsItemComponent }
 ];
 
 @NgModule({

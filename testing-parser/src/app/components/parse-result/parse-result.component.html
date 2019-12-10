@@ -1,0 +1,34 @@
+<div class="news">
+    <div class="news-page-container">
+        <div class="news-page" *ngIf="parsedData; else noNewsTemplate">
+            <div class="news-page__item-container" *ngFor="let data of parsedData">
+                <div class="news-page__item">
+                    <div class="news-page__item_title">
+                        {{data.title}}
+                    </div>
+                    <p class="news-page__item_date">
+                        {{data.date}}
+                    </p>
+                    <div class="news-page__item_img-container">
+                        <img class="news-page__item_img" src="{{data.imgUrl}}" alt="Article preview image">
+                    </div>
+                    <div class="news-page__item_article">
+                        <p>
+                            {{data.description}}
+                        </p>
+                    </div>
+                    <div class="news-page__item_read-full-news">
+                        <button class="news-page__item_read-full-news-button"
+                            (click)="checkNewsItem(data.url)">Подробнее...</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template class="news-page" #noNewsTemplate>
+    <div class="news-page__item news-page__item_empty">
+        There are no news right now, check us later
+    </div>
+</ng-template>

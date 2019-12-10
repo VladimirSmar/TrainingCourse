@@ -1,0 +1,119 @@
+[debug] [2019-11-18T10:42:03.956Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:42:03.958Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init scrapper
+[debug] [2019-11-18T10:42:03.959Z] CLI Version:   7.7.0
+[debug] [2019-11-18T10:42:03.959Z] Platform:      win32
+[debug] [2019-11-18T10:42:03.959Z] Node Version:  v12.13.0
+[debug] [2019-11-18T10:42:03.959Z] Time:          Mon Nov 18 2019 13:42:03 GMT+0300 (Moscow Standard Time)
+[debug] [2019-11-18T10:42:03.960Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:42:03.960Z] 
+[debug] [2019-11-18T10:42:03.965Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-18T10:42:03.965Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Uladzimir_Shumanski\Documents\GitHub\TrainingCourse
+
+[debug] [2019-11-18T10:42:31.091Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:42:31.094Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init scrapper
+[debug] [2019-11-18T10:42:31.094Z] CLI Version:   7.7.0
+[debug] [2019-11-18T10:42:31.094Z] Platform:      win32
+[debug] [2019-11-18T10:42:31.094Z] Node Version:  v12.13.0
+[debug] [2019-11-18T10:42:31.095Z] Time:          Mon Nov 18 2019 13:42:31 GMT+0300 (Moscow Standard Time)
+[debug] [2019-11-18T10:42:31.095Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:42:31.095Z] 
+[debug] [2019-11-18T10:42:31.101Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-18T10:42:31.102Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Uladzimir_Shumanski\Documents\GitHub\TrainingCourse
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project.
+[debug] [2019-11-18T10:43:06.928Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-11-18T10:43:06.928Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-11-18T10:43:07.081Z] <<< HTTP RESPONSE 200
+[debug] [2019-11-18T10:43:07.095Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects  
+
+[debug] [2019-11-18T10:43:08.188Z] <<< HTTP RESPONSE 409
+[debug] [2019-11-18T10:43:08.189Z] <<< HTTP RESPONSE BODY
+[debug] [2019-11-18T10:43:08.190Z] HTTP Error: 409, Requested entity already exists
+[debug] [2019-11-18T10:43:08.196Z] FirebaseError: HTTP Error: 409, Requested entity already exists
+    at module.exports (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Request._callback (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:39:35)
+    at Request.self.callback (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at Request.<anonymous> (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1161:10)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at IncomingMessage.<anonymous> (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1083:12)
+    at Object.onceWrapper (events.js:299:28)
+[error] 
+[error] Error: Failed to create Google Cloud project. See firebase-debug.log for more info.
+[debug] [2019-11-18T10:53:26.496Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:53:26.499Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init scrapper
+[debug] [2019-11-18T10:53:26.499Z] CLI Version:   7.7.0
+[debug] [2019-11-18T10:53:26.499Z] Platform:      win32
+[debug] [2019-11-18T10:53:26.499Z] Node Version:  v12.13.0
+[debug] [2019-11-18T10:53:26.500Z] Time:          Mon Nov 18 2019 13:53:26 GMT+0300 (Moscow Standard Time)
+[debug] [2019-11-18T10:53:26.500Z] ----------------------------------------------------------------------
+[debug] [2019-11-18T10:53:26.500Z] 
+[debug] [2019-11-18T10:53:26.506Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-11-18T10:53:26.506Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\Uladzimir_Shumanski\Documents\GitHub\TrainingCourse
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project.
+[debug] [2019-11-18T10:54:02.166Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects  
+
+[debug] [2019-11-18T10:54:03.207Z] <<< HTTP RESPONSE 409
+[debug] [2019-11-18T10:54:03.208Z] <<< HTTP RESPONSE BODY
+[debug] [2019-11-18T10:54:03.209Z] HTTP Error: 409, Requested entity already exists
+[debug] [2019-11-18T10:54:03.212Z] FirebaseError: HTTP Error: 409, Requested entity already exists
+    at module.exports (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\responseToError.js:38:12)
+    at Request._callback (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\lib\api.js:39:35)
+    at Request.self.callback (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:185:22)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at Request.<anonymous> (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1161:10)
+    at Request.emit (events.js:210:5)
+    at Request.EventEmitter.emit (domain.js:476:20)
+    at IncomingMessage.<anonymous> (C:\Users\Uladzimir_Shumanski\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1083:12)
+    at Object.onceWrapper (events.js:299:28)
+[error] 
+[error] Error: Failed to create Google Cloud project. See firebase-debug.log for more info.

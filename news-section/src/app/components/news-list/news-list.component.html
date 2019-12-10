@@ -1,9 +1,29 @@
 <div class="news">
     <div class="news-page-container">
-        <div class="news-page" *ngIf="">
-            <div class="news-page__item" *ngFor="">
-                <app-news-item></app-news-item>
+        <div class="news-page" *ngIf="newsList; else noNewsTemplate">
+            <div class="news-page__item-container" *ngFor="let item of newsList">
+                <div class="news-page__item" (click)="checkNewsItem(item.id)">
+                    <div class="news-page__item_title">
+                        <p>
+                            {{item.title}}
+                        </p>
+                    </div>
+                    <div class="news-page__item_img-container">
+                        <img class="news-page__item_img" src="{{item.previewImageUrl}}" alt="Article preview image">
+                    </div>
+                    <div class="news-page__item_article">
+                        <p>
+                            {{item.article}}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<ng-template class="news-page" #noNewsTemplate>
+    <div class="news-page__item">
+        There are no news right now, check us later
+    </div>
+</ng-template>

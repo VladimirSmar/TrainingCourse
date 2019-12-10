@@ -1,0 +1,26 @@
+export class Monster {
+
+    name: string = null;
+    moneyPerDeath: number = null;
+    health: number = null;
+    maxHealth: number = null;
+    modificator: number = null;
+    goldModificator: number = null;
+
+    public static fromJSON(json: any) {
+        let monster: Monster = null;
+        const elem = json.json();
+        monster = new Monster(elem.name, elem.moneyPerDeath, elem.health, elem.maxHealth, elem.modificator, elem.goldModificator);
+        return monster;
+    }
+
+    constructor(name: string, moneyPerDeath: number, health: number, maxHealth: number, modificator: number, goldModificator: number) {
+        this.name = name;
+        this.moneyPerDeath = moneyPerDeath;
+        this.health = health;
+        this.maxHealth = maxHealth;
+        this.modificator = modificator;
+        this.goldModificator = goldModificator;
+    }
+
+}
